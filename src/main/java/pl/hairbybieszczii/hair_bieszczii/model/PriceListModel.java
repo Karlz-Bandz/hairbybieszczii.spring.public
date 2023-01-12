@@ -2,6 +2,7 @@ package pl.hairbybieszczii.hair_bieszczii.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "PriceListModel")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 public class PriceListModel implements Serializable {
 

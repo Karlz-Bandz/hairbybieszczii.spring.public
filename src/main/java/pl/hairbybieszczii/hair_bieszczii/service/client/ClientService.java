@@ -23,9 +23,10 @@ public class ClientService {
     private ClientRepository clientRepository;
     private DescriptionRepository descriptionRepository;
 
-    public void addNewClient(@RequestBody ClientDto clientDto) {
+    public ClientDto addNewClient(@RequestBody ClientDto clientDto) {
         EntityClient entityClient = new EntityClient(clientDto);
         clientRepository.save(entityClient);
+        return clientDto;
     }
 
 
@@ -41,7 +42,7 @@ public class ClientService {
         descriptionRepository.deleteById(id);
     }
 
-    public void addNewDescription(@RequestBody DescriptionDto descriptionDto) {
+    public boolean addNewDescription(@RequestBody DescriptionDto descriptionDto) {
         EntityClient entityClient = clientRepository.findById(descriptionDto.getId()).orElseThrow(
                 () -> new RuntimeException("Klient nie istnieje!")
         );
@@ -51,6 +52,8 @@ public class ClientService {
 
         entityClient.addToList(entityClientDescription);
         clientRepository.save(entityClient);
+
+        return true;
     }
 
 

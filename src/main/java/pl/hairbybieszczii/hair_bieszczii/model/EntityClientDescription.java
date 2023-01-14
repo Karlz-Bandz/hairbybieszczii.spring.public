@@ -3,6 +3,9 @@ package pl.hairbybieszczii.hair_bieszczii.model;
 
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +16,8 @@ import java.util.Date;
 @Entity
 @Table(name = "client_description")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class EntityClientDescription {
     @Id

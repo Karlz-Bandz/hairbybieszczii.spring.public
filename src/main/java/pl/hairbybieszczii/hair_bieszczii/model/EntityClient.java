@@ -2,6 +2,9 @@ package pl.hairbybieszczii.hair_bieszczii.model;
 
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.hairbybieszczii.hair_bieszczii.dto.ClientDto;
@@ -15,7 +18,9 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "clients")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class EntityClient {
 
 

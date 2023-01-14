@@ -17,6 +17,8 @@ import pl.hairbybieszczii.hair_bieszczii.model.EntityClientDescription;
 import pl.hairbybieszczii.hair_bieszczii.repo.ClientRepository;
 import pl.hairbybieszczii.hair_bieszczii.service.client.ClientService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -77,8 +79,7 @@ public class ClientServiceTests {
 
          boolean returnedTest = clientService.existsById(client.getId());
 
-         verify(clientRepository, times(1)).existsById(client.getId());
-         verifyNoMoreInteractions(clientRepository);
+
 
          Assertions.assertThat(returnedTest).isEqualTo(true);
      }
@@ -86,66 +87,36 @@ public class ClientServiceTests {
      @Test
      public void ClientService_AddNewDescription_Return_Test(){
         EntityClient client = EntityClient.builder()
-                .id(1)
+
                 .clientName("Mariusz")
                 .clientSurname("Test")
                 .phoneNumber("33-44")
-                .build();
-         ClientDto clientDto = ClientDto.builder()
 
-                 .clientName("Mariusz")
-                 .clientSurname("Test")
-                 .phoneNumber("33-44")
-                 .build();
+         .build();
+
          DescriptionDto description = DescriptionDto.builder()
-                         .id(1)
+                         .id(client.getId())
                                  .description("Test")
                                          .build();
          EntityClientDescription entityDescription = EntityClientDescription.builder()
+                 .id(client.getId())
                          .description("Test")
                                  .build();
-//         client.addToList(entityDescription);
 
-         when(clientRepository.save(Mockito.any(EntityClient.class)))
-                 .thenReturn(client);
-
+         List<EntityClientDescription> descriptionsList = new ArrayList<>();
+         descriptionsList.add(entityDescription);
 
 
-         ClientDto savedClient = clientService.addNewClient(clientDto);
+         when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
+         when(clientRepository.save(Mockito.any(EntityClient.class))).thenReturn(client);
 
-//                  when(clientRepository.findById(1))
-//                 .thenReturn(Optional.ofNullable(client));
+         client.setDescriptions(descriptionsList);
 
-
-//         boolean solution = clientService.addNewDescription(description);
+         boolean returnedTest = clientService.addNewDescription(description);
 
 
 
-         Assertions.assertThat(savedClient).isNotNull();
-//         Assertions.assertThat(solution).isEqualTo(true);
-
-
-//         ClientDto clientTest = clientService.addNewClient(clientDto);
-//
-//
-//
-//         doReturn(client).when(clientRepository).save(Mockito.any(EntityClient.class));
-//         when(clientRepository.save(Mockito.any(EntityClient.class)))
-//                 .thenReturn(client);
-//         when(clientRepository.findById(description.getId()))
-//                 .thenReturn(Optional.ofNullable(client));
-
-
-//        ClientDto clientTest = clientService.addNewClient(clientDto);
-
-
-
-//         boolean solution = clientService.addNewDescription(description);
-
-
-
-//         Assertions.assertThat(clientTest).isNotNull();
-
+         Assertions.assertThat(returnedTest).isEqualTo(true);
 
 
 

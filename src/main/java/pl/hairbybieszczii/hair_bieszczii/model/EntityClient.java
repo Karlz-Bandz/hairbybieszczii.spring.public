@@ -45,7 +45,9 @@ public class EntityClient {
     @JoinTable(name = "client_description_join", joinColumns = @JoinColumn(name = "client_id",
             referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "description_id",
             referencedColumnName = "id"))
+    @Builder.Default
     private List<EntityClientDescription> descriptions = new ArrayList<>();
+
 
     public void addToList(EntityClientDescription entityClientDescription) {
         descriptions.add(entityClientDescription);

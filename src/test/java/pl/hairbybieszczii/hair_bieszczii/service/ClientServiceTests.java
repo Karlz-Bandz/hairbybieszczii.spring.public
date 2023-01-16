@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -108,6 +109,7 @@ public class ClientServiceTests {
 
         clientService.deleteClientById(entityClient.getId());
         verify(clientRepository).deleteById(entityClient.getId());
+
     }
     @Test
     public void ClientService_DeleteDescriptionById_DescriptionDeleted(){
